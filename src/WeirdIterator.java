@@ -13,7 +13,7 @@ public class WeirdIterator<T> implements Iterator<T>
 
     public <T> WeirdIterator(WeirdArray<T> wa)
     {
-        WeirdArray<T> array = new WeirdArray<>(this.wa);
+        WeirdArray<T> arrayy = new WeirdArray<>(this.wa);
     }
 
    public boolean hasNext() {
