@@ -19,7 +19,7 @@ public class WeirdArray<T> implements Iterable<T>
      */
     public Iterator<T> iterator()
     {
-
+        return new WeirdArray();
     }
 
 }
