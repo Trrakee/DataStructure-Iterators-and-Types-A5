@@ -11,14 +11,13 @@ public class WeirdIterator<T> implements Iterator<T>
     int current = 0;
 
 
-    public WeirdIterator(WeirdArray<T> wa)
+    public <T> WeirdIterator(WeirdArray<T> wa)
     {
-        WeirdArray<T>obj =new<> wa;
+        WeirdArray<T> array = new WeirdArray<>(this.wa);
     }
 
-
-    public boolean hasNext() {
-        return current < Array.this.values.length;
+   public boolean hasNext() {
+        return current < array.this.values.length;
     }
 
 
@@ -33,7 +32,7 @@ public class WeirdIterator<T> implements Iterator<T>
 
     // Return the value at a given index
     public T get(int index) {
-        return values[index];
+        return array[index];
     }
 
     // Set the value at a given index

@@ -4,8 +4,7 @@ public class WeirdArray<T> implements Iterable<T>
     private Object[] theArray;
     public WeirdArray(int n)
     {
-
-
+        int[] array =new int[n];
     }
 
 
