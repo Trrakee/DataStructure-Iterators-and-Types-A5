@@ -1,59 +1,70 @@
-import java.lang.reflect.Array;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 /**
-
+ ----------------------------------
+ | Program created by Tushar Sharma.|
+ | CS27500 Homework 5               |
+ | Email: sharm191@pnw.edu          |
+ | File Info: WeirdIterator Class   |
+ ----------------------------------
  */
-public class WeirdIterator<T> implements Iterator<T>
-{
-    // What fields do you need?
-    int current = 0;
+import java.util.NoSuchElementException;
+import java.util.Iterator;
+public class WeirdIterator<T> implements Iterator<T> {
+    private WeirdArray<T> wrdArray;
+    private int index;
+    private int[] newWrd;
 
-
-    public <T> WeirdIterator(WeirdArray<T> wa)
-    {
-        WeirdArray<T> array = new WeirdArray<>(this.wa);
-    }
-
-   public boolean hasNext() {
-        return current < array.this.values.length;
-    }
-
-
-    // return the next element of the iteration and move the current
-    // index to the element after that.
-    public T next() {
-        if (!hasNext()) {
-            throw new NoSuchElementException();
+    /**
+     * @param wa Once the instance variables are initialized. It will set the middle item of wrdArray equal to the first
+     *           element of newWrd array.
+     *           And then it steps through and fills in newWrd
+     *           and
+     *           Also fills it in with the correct order.
+     */
+    public WeirdIterator(WeirdArray<T> wa) {
+        wrdArray = wa;
+        index = 0;
+        newWrd = new int[wrdArray.getLength()];
+        if (this.wrdArray.getLength() % 2 == 0) {
+            int middle = (wrdArray.getLength() / 2) - 1;
+            newWrd[0] = middle;
+/* fill in first half **/
+            for (int x = 2; x < wrdArray.getLength(); x += 2) {
+                newWrd[x] = --middle;
+            }
+            middle = (wrdArray.getLength() / 2) - 1;
+/*fill in the second half **/
+            for (int x = 1; x < wrdArray.getLength(); x += 2) {
+                newWrd[x] = ++middle;
+            }
         }
-        return values[current++];
+/*if the WeirdArray is odd**/
+        else {
+            int middle = wrdArray.getLength() / 2;
+            newWrd[0] = middle;
+/*fills in the first half of the array**/
+            for (int x = 1; x < wrdArray.getLength(); x += 2) {
+                newWrd[x] = --middle;
+            }
+            middle = wrdArray.getLength() / 2;
+/*fills in the second half of the array**/
+            for (int x = 2; x < wrdArray.getLength(); x += 2) {
+                newWrd[x] = ++middle;
+            }
+        }
     }
 
-    // Return the value at a given index
-    public T get(int index) {
-        return array[index];
+    public boolean hasNext() {
+        return (index < wrdArray.getLength());
     }
 
-    // Set the value at a given index
-    public void set(int index, T value) {
-        values[index] = value;
+    public T next() {
+        if (hasNext()) {
+            return wrdArray.getElement(newWrd[index++]);
+        } else
+            throw new NoSuchElementException();
     }
 
-    // Return the length of the array
-    public int length() {
-        return values.length;
-    }
-
-    // Return an iterator over the elements in the array. This is generally not
-    // called directly, but is called by Java when used in a "simple" for loop.
-    public Iterator<T> iterator() {
-        return new ArrayIterator();
-    }
-
-
-    public void remove()
-    {
+    public void remove() {
         throw new UnsupportedOperationException();
     }
 }
