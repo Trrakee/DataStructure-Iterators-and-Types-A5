@@ -12,13 +12,13 @@ public class WeirdIterator<T> implements Iterator<T> {
     private WeirdArray<T> wrdArray;
     private int index;
     private int[] newWrd;
-
     /**
      * @param wa Once the instance variables are initialized. It will set the middle item of wrdArray equal to the first
      *           element of newWrd array.
      *           And then it steps through and fills in newWrd
      *           and
      *           Also fills it in with the correct order.
+     *           A constructor that takes a reference to a WeirdArray<T> object. The object that it is going to iterate through.
      */
     public WeirdIterator(WeirdArray<T> wa) {
         wrdArray = wa;
@@ -52,18 +52,15 @@ public class WeirdIterator<T> implements Iterator<T> {
             }
         }
     }
-
     public boolean hasNext() {
         return (index < wrdArray.getLength());
     }
-
     public T next() {
         if (hasNext()) {
             return wrdArray.getElement(newWrd[index++]);
         } else
             throw new NoSuchElementException();
     }
-
     public void remove() {
         throw new UnsupportedOperationException();
     }

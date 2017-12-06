@@ -12,7 +12,10 @@ public class WeirdIterator2<T> implements Iterator<T> {
     private WeirdArray<T> wrdArray;
     private int index;
     private int[] newWrd;
-
+    /**
+     *
+     * @param wa
+     */
     public WeirdIterator2(WeirdArray<T> wa) {
         wrdArray = wa;
         index = 0;
